@@ -83,7 +83,7 @@ We also provide a couple of examples with cheetahs, using only one image.
 ![demo](./images/cheetahs.png)
 
 ## Annotation Tool
-This repo also contains the annotation tool in Matlab we used to annotate the keypoints in [`src/annotate_kp_matlab`](./src/annotate_kp_matlab). The driver is `annotate_images.m`. Please look at the [README](./src/annotate_kp_matlab/README.txt) file in the annotation tool directory for more details.
+This repo also contains the annotation tool in Matlab we used to annotate the keypoints in [`src/annotate_kp_matlab`](./src/annotate_kp_matlab). The driver is `annotate_images.m`. Please look at the [README](./src/annotate_kp_matlab/README.md) file in the annotation tool directory for more details.
 
 ## Citation
 
