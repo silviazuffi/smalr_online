@@ -1,15 +1,19 @@
-# smalr_online
+# SMALR
 
-This code fits the [SMAL](http://smal.is.tue.mpg.de/) model to a set of images with 2D keypoints and silhouettes annotation, and then perfromes a refinement as described in the paper "Lions and Tigers and Bears: Capturing Non-Rigid, 3D, Articulated Shape from Images".
+This repository provides the annotation tool and the fitting code that fits the [SMAL](http://smal.is.tue.mpg.de/) model to a set of images with 2D keypoints and silhouettes annotation and performs refinement as described in the SMALR [paper]((http://files.is.tue.mpg.de/black/papers/zuffiCVPR2018.pdf)): _Lions and Tigers and Bears: Capturing Non-Rigid, 3D, Articulated Shape from Images_, by Silvia Zuffi, Angjoo Kanazawa, and Michael J. Black, CVPR 2018. 
+![teaser](./images/SMALR.png)
 
-The code requires python 3.8. 
+
+If you are looking for the 3D results from the SMALR paper, please find them in the [project page](http://smalr.is.tue.mpg.de/). 
+
+This was also used for making the training data for [SMALST](https://github.com/silviazuffi/smalst). 
 
 We provide a demo for applying the code to images of the Tasmanian tiger, the Grevy's zebra, and cheetah.
 
 The code was written by Silvia Zuffi and Angjoo Kanazawa, with contributions from Matt Loper, Federica Bogo, Javier Romero, Gerard Pons Moll.
 
 ## Installation
-The code requires the following packages:
+The code requires python 3.8 and the following packages:
 chumpy,
 opencv,
 matplotlib,
@@ -70,14 +74,20 @@ You will obtain images like the one below:
 
 
 In the settings file, there is an option `max_tex_weight` that if set to True gives sharp texture, and if set to False gives smooth texture.
-We used smooth texture for the Tasmanian tiger in the [SMALR](http://smalr.is.tue.mpg.de/) paper and shape texture for making the dataset of Grevy's zebra in the [SMALST](https://github.com/silviazuffi/smalst) paper. 
+We used smooth texture for the Tasmanian tiger in the [SMALR](http://smalr.is.tue.mpg.de/) paper and shape texture for making the dataset of Grevy's zebra in the
+[SMALST](https://github.com/silviazuffi/smalst) paper. 
 ![demo](./images/ttiger.png)
 ![demo](./images/gzebra.png)
 
 We also provide a couple of examples with cheetahs, using only one image.
 ![demo](./images/cheetahs.png)
 
-If you use the code please cite the following papers:
+## Annotation Tool
+This repo also contains the annotation tool in Matlab we used to annotate the keypoints in [`src/annotate_kp_matlab`](./src/annotate_kp_matlab). The driver is `annotate_images.m`. Please look at the [README](./src/annotate_kp_matlab/README.txt) file in the annotation tool directory for more details.
+
+## Citation
+
+If you found any of the pieces of code useful in this repo, please cite the following papers:
 
 ```
 @inproceedings{Zuffi:CVPR:2018,  
@@ -98,3 +108,6 @@ If you use the code please cite the following papers:
   year = {2017},  
 }
 ```
+
+## Related Work
+If you are interested in this line of work, you may also find this [SMALify](https://github.com/benjiebob/SMALify) repo from Ben Biggs useful!
