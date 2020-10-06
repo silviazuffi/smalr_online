@@ -1,6 +1,6 @@
 # SMALR
 
-This repository provides the annotation tool and the fitting code that fits the [SMAL](http://smal.is.tue.mpg.de/) model to a set of images with 2D keypoints and silhouettes annotation and performs refinement as described in the SMALR [paper]((http://files.is.tue.mpg.de/black/papers/zuffiCVPR2018.pdf)): _Lions and Tigers and Bears: Capturing Non-Rigid, 3D, Articulated Shape from Images_, by Silvia Zuffi, Angjoo Kanazawa, and Michael J. Black, CVPR 2018. 
+This repository provides the annotation tool and the fitting code that fits the [SMAL](http://smal.is.tue.mpg.de/) model to a set of images with annotated 2D keypoints and silhouettes and performs refinement as described in the SMALR [paper]((http://files.is.tue.mpg.de/black/papers/zuffiCVPR2018.pdf)): _Lions and Tigers and Bears: Capturing Non-Rigid, 3D, Articulated Shape from Images_, by Silvia Zuffi, Angjoo Kanazawa, and Michael J. Black, CVPR 2018. 
 ![teaser](./images/SMALR.png)
 
 
