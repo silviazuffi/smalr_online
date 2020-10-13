@@ -6,7 +6,7 @@ import cv2
 import pickle as pkl
 from os.path import join, exists, splitext, basename
 from os import makedirs
-from mycore.io import load_animal_model, load_keypoints, get_matlab_anno, load_seg
+from mycore.io import load_animal_model, load_keypoints, load_seg
 from glob import glob
 from multiclip_model_fit import multi_clip_model_fit_w_keypoints
 from mycore.io import get_anno_path, load_keymapping

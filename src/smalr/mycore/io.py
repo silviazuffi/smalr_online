@@ -8,30 +8,6 @@ def load_seg(img_path, return_path=False, img_ext='.png'):
     else:
         return cv2.imread(seg_path), seg_path
 
-
-def get_matlab_anno(anno):
-    import numpy as np
-    import cv2
-    if 'cam_info' in anno._fieldnames and len(anno.cam_info._fieldnames) > 0:
-        # if 'R' not in anno.cam_info._fieldnames:
-        if 'rotation' in anno.cam_info._fieldnames:
-            rotation = anno.cam_info.rotation.T.copy()
-            mtx0 = cv2.Rodrigues(np.array([np.pi, 0, 0]))[0]
-            rot = cv2.Rodrigues(rotation.dot(mtx0))[0].ravel()
-        else:
-            rotation = anno.cam_info.R.copy()
-            rot = cv2.Rodrigues(rotation)[0].ravel()
-
-        # import matplotlib.pyplot as plt
-        # plt.ion()
-        # img_here = render_mesh(Mesh(model.r, model.f), img.shape[1], img.shape[0], cam, near=0.5, far=20)
-        # plt.imshow(img_here)
-
-        return rot
-
-    return None
-
-
 def get_anno_path(img_path, post_fix='_smpl.mat'):
     from os.path import join, dirname, basename
 
@@ -64,133 +40,25 @@ def load_animal_model(model_name='my_smpl_15.pkl'):
     from smpl_webuser.serialization import load_model
     from os.path import exists, join
 
-    model_dir = '/scratch1/projects/MPI_data/' if exists(
-        '/scratch1/projects') else '/is/ps/shared/silvia/'
-    model_dir = '/Users/silvia/Dropbox/animal_proj_silvia/'
     model_dir = '../../'
-    #model_path = join(model_dir, 'smpl_animal_models', model_name)
     model_path = join(model_dir, 'smpl_models', model_name)
     model = load_model(model_path)
     return model
 
 
-def get_track_vids():
-    # Only track these points. or do all?
-    import sys
-    sys.path.append(
-        '/scratch1/Dropbox/research/animal_proj/smpl_lioness_model_keypoints/')
-    from smpl_lioness_keypoints import keypoints
-    track_points = [
-        'nose_tip',
-        'eye_left_outside',
-        'eye_right_outside',
-        # 'ear_left_tip',
-        # 'ear_right_tip',
-        'armpit_left',
-        'armpit_right',
-        'wrist_left',
-        'wrist_right',
-        'foot_left_front',
-        'foot_right_front',
-        'hip_left',
-        'hip_right',
-        'knee_left_back',
-        'knee_right_back',
-        'foot_left_back',
-        'foot_right_back',
-        'tail_begin_top',
-        'tail_tip',
-        'between_shoulder_blades'
-    ]
-    # track_points = [
-    #     'nose_tip',
-    #     # 'armpit_left',
-    #     # 'armpit_right',
-    #     'wrist_left',
-    #     'wrist_right',
-    #     # 'foot_left_front',
-    #     # 'foot_right_front',
-    #     # 'hip_left',
-    #     # 'hip_right',
-    #     'knee_left_back',
-    #     'knee_right_back',
-    #     'foot_left_back',
-    #     'foot_right_back',
-    #     'tail_begin_top',
-    #     'tail_tip',
-    #     # 'between_shoulder_blades'
-    # ]
-    track_vids = [keypoints[name] for name in track_points]
-    return track_vids
-
-
-def get_ferrari_data(shot_id, frame_id, animal, min_size=300):
-    from os.path import join, exists
-    import numpy as np
-    img_dir = join('/scratch1/projects/behaviorDiscovery2.0/', animal)
-    anno_dir = join('/scratch1/projects/behaviorDiscovery2.0/landmarks/',
-                    animal)
-    anno_path = join(anno_dir, '%d.mat' % shot_id)
-
-    if not exists(anno_path):
-        print('%s doesnt exist!' % anno_path)
-        import ipdb
-        ipdb.set_trace()
-
-    import scipy.io as sio
-    landmarks = sio.loadmat(
-        anno_path, squeeze_me=True, struct_as_record=False)['landmarks']
-
-    if frame_id > len(landmarks):
-        print('%d too long %d' % (frame_id, len(landmarks)))
-        import ipdb
-        ipdb.set_trace()
-
-    kp_here = np.hstack((landmarks[frame_id].positions,
-                         np.atleast_2d(landmarks[frame_id].present).T))
-
-    # Find the image path:
-    range_path = '/scratch1/projects/behaviorDiscovery2.0/ranges/%s/ranges.mat' % animal
-    ranges = sio.loadmat(
-        range_path, squeeze_me=True, struct_as_record=False)['ranges']
-
-    rel_ranges = (ranges[:, 0] == shot_id).nonzero()[0]
-    interval = np.arange(ranges[rel_ranges, 1], ranges[rel_ranges, 2])
-
-    img_path = join(img_dir, '%08d.jpg' % interval[frame_id])
-    assert (exists(img_path))
-
-    return img_path, kp_here
-
-
-# def load_keymapping(landmarks, animal):
 def load_keymapping(animal):
     import scipy.io as sio
     import numpy as np
     from os.path import exists
-    if True: #exists('/scratch1/'):
-        #map_path = '/scratch1/projects/animalcap/annotate_kp_matlab/ferrari2smpl_%s.mat' % animal
-        #map_path = '/Users/silvia/Dropbox/Work/animalcap/annotate_kp_matlab/ferrari2smpl_%s.mat' % animal
-        #map_path = '/Users/silvia/Dropbox/Work/animals_mocap/src/annotate_kp_matlab/ferrari2smpl_%s.mat' % animal
-        #map_path = '/Users/silvia/Dropbox/Work/animals_mocap/src/annotate_kp_matlab/ferrari2smpl_%s_wears.mat' % animal
-        #map_path = '/Users/silvia/Dropbox/Work/animals_mocap/src/annotate_kp_matlab/ferrari2smpl_%s_wears_new_tailstart.mat' % animal
-        map_path = '/Users/silvia/Dropbox/Work/smalr/src/annotate_kp_matlab_video/ferrari2smpl_%s.mat' % animal
-    else:
-        map_path = '/home/akanazawa/projects/animalcap/annotate_kp_matlab/ferrari2smpl_%s.mat' % animal
+    map_path = '../../src/annotate_kp_matlab/ferrari2smpl_%s.mat' % animal
     mapping = sio.loadmat(map_path, squeeze_me=True, struct_as_record=False)['map']
-    # vis = landmarks[:, 2].astype(bool)
-    # v_ids = mapping.vids[vis]
     v_ids = mapping.vids
     # Make single keyids into array instead of bare int..
     # -1 because the indices are in matlab.
     v_ids = np.array([np.atleast_1d(v) - 1 for v in v_ids])
 
-    # keypoints = landmarks[vis, :2]
-
     kp_names = mapping.names
     kp_names = [name.encode('ascii', 'ignore') for name in kp_names]
-
-    # return keypoints, v_ids
     return v_ids, kp_names
 
 def crop_img(img, landmarks, min_size=300, max_width=1000, seg=None, get_rect=False):

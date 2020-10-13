@@ -14,7 +14,7 @@ import pickle as pkl
 from psbody.mesh import Mesh
 from psbody.mesh.colors import name_to_rgb
 
-from mycore.io import load_animal_model, load_keypoints, get_matlab_anno, load_seg
+from mycore.io import load_animal_model, load_keypoints, load_seg
 from mycore.camera import setup_camera
 from util.myrenderer import render_mesh
 from estimate_global_pose import estimate_global_pose
