@@ -122,13 +122,13 @@ class ARAP(Ch):
             self.A9 = sp.csc_matrix((A9_data, (A9_row, A9_col)),
                                     shape=(A.shape[0]*9, A.shape[1]*9))
 
-            wmatcoo = self.wmat.tocoo()
-            wmat3_data = np.tile(wmatcoo.data, 3)
-            wmat3_row = np.hstack([wmatcoo.row*3 + i for i in range(3)])
-            wmat3_col = np.hstack([wmatcoo.col*3 + i for i in range(3)])
-            self.wmat3 = sp.csc_matrix((wmat3_data, (wmat3_row, wmat3_col)),
-                                       shape=(wmatcoo.shape[0]*3,
-                                              wmatcoo.shape[1]*3))
+            #wmatcoo = self.wmat.tocoo()
+            #wmat3_data = np.tile(wmatcoo.data, 3)
+            #wmat3_row = np.hstack([wmatcoo.row*3 + i for i in range(3)])
+            #wmat3_col = np.hstack([wmatcoo.col*3 + i for i in range(3)])
+            #self.wmat3 = sp.csc_matrix((wmat3_data, (wmat3_row, wmat3_col)),
+            #                           shape=(wmatcoo.shape[0]*3,
+            #                                  wmatcoo.shape[1]*3))
 
         if 'reg_e' in which or 'model_e' in which:
             T = np.einsum('ij,jk->ikj',
