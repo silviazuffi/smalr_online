@@ -14,7 +14,7 @@ import pickle as pkl
 symIdx = pkl.load(open('symIdx.pkl','rb'), encoding='latin1')
 
 max_image_size = 480
-animals_set = ['cheetah_D'] #'zebra_A'] 
+animals_set = ['pig_B'] #['cheetah_D'] #'zebra_A'] 
 
 init_flength = 1000.
 align_w_optimized_template = False
@@ -59,6 +59,17 @@ for animal in animals_set:
         clip_set = ['01']
         fStart = ['0000']
         fStop = ['0000']
+
+    elif animal == 'pig_B':
+        border = 20
+        use_face_landmarks = True
+        no_tail = False
+        family = 'other'
+        base_dir = '../../data/'
+        clip_set = ['01', '01','01','01','01']
+        fStart = ['0002','0003', '0004', '0005', '0006']
+        fStop = ['0002', '0003', '0004', '0005', '0006']
+
 
 
     animal_set = [animal]*len(clip_set)
