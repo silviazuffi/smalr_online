@@ -53,7 +53,7 @@ class Prior(object):
         self.precs = res['pic']
         self.mean = res['mean_pose']
         # Mouth closed!
-        self.mean[-2] = -0.4
+        # self.mean[-2] = -0.4
         # Ignore the first 3 global rotation.
         prefix = 3
         if '33parts' in prior_path:
