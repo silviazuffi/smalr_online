@@ -65,7 +65,7 @@ Settings are listed in `smalr_settings.py`.
 Run
 `python run_on_animals.py`. 
 
-You will obtain images like the one below:
+You will obtain images like the ones below:
 
 ![demo](./images/frame7584_v_opt.png) 
 ![demo](./images/frame7181_v_opt.png) 
